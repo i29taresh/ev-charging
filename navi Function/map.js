@@ -1,13 +1,13 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiaTI5dGFyZXNoIiwiYSI6ImNsaDFtcTVhZzBhMTIzb29hYWsycHQyY3QifQ.9puy6GfNXVpfObCbUhStgA';
 
-const map = new mapboxgl.Map({
+const map1 = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v12',
   center: [76.768066, 30.741482], // starting position
   zoom: 12
 });
 
-map.addControl(
+map1.addControl(
     new mapboxgl.GeolocateControl({
         positionOptions: {
             enableHighAccuracy: true
@@ -28,7 +28,7 @@ if ('geolocation' in navigator) {
 
         // Center the map on the user's location
         start = [longitude, latitude];
-        map.setCenter([longitude, latitude]);
+        map1.setCenter([longitude, latitude]);
     });
 } else {
     alert('Geolocation is not supported by your browser');
@@ -58,12 +58,12 @@ async function getRoute(end) {
       }
     };
     // if the route already exists on the map, we'll reset it using setData
-    if (map.getSource('route')) {
-      map.getSource('route').setData(geojson);
+    if (map1.getSource('route')) {
+      map1.getSource('route').setData(geojson);
     }
     // otherwise, we'll make a new request
     else {
-      map.addLayer({
+      map1.addLayer({
         id: 'route',
         type: 'line',
         source: {
@@ -94,13 +94,13 @@ async function getRoute(end) {
     )} min 🚴 </strong></p><ol>${tripInstructions}</ol>`;
   }
   
-  map.on('load', () => {
+  map1.on('load', () => {
     // make an initial directions request that
     // starts and ends at the same location
     getRoute(start);
   
     // Add starting point to the map
-    map.addLayer({
+    map1.addLayer({
       id: 'point',
       type: 'circle',
       source: {
@@ -125,7 +125,7 @@ async function getRoute(end) {
       }
     });
 
-    map.on('click', (event) => {
+    map1.on('click', (event) => {
         const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
         const end = {
           type: 'FeatureCollection',
@@ -140,10 +140,10 @@ async function getRoute(end) {
             }
           ]
         };
-        if (map.getLayer('end')) {
-          map.getSource('end').setData(end);
+        if (map1.getLayer('end')) {
+          map1.getSource('end').setData(end);
         } else {
-          map.addLayer({
+          map1.addLayer({
             id: 'end',
             type: 'circle',
             source: {

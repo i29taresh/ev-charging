@@ -32,19 +32,27 @@ code {
 }
 
 .marker_green {
-  background-image: url('C:\Users\HP\Desktop\mapbox\public\green_pin.png');
+  background-image: url('/Users/bhavyatanwar/Desktop/ev-charging/public/charging-station.png');
   background-size: cover;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   cursor: pointer;
 }
 .marker_red {
-  background-image: url('C:\Users\HP\Desktop\mapbox\public\red_pin.png');
+  background-image: url('/Users/bhavyatanwar/Desktop/ev-charging/public/charging-station-red.png');
   background-size: cover;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  cursor: pointer;
+}
+.marker_black {
+  background-image: url('/Users/bhavyatanwar/Desktop/ev-charging/public/charging.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  /* border-radius: 50%; */
   cursor: pointer;
 }
 

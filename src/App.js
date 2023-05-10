@@ -1,33 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-
+// import geojson from './database/chargingStation';
 mapboxgl.accessToken = 'pk.eyJ1IjoiaTI5dGFyZXNoIiwiYSI6ImNsaDFtcTVhZzBhMTIzb29hYWsycHQyY3QifQ.9puy6GfNXVpfObCbUhStgA';
 
 export default function App() {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(76.7794);
-  const [lat, setLat] = useState(30.7333);
-  const [zoom, setZoom] = useState(7);
-
-  useEffect(() => {
-    if (map.current) return; // initialize map only once
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [lng, lat],
-      zoom: zoom
-    });
-  });
-
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-    });
-  });
   const geojson = {
     "type": "FeatureCollection",
     "features": [
@@ -39,6 +15,8 @@ export default function App() {
           "address": "Khandala Motor Garage, H. No. 213, Mumbai Pune Road, Near Khandala Police Station, Khandala, Maharashtra 410301",
           "notes": "The charging station is available 7 days a week between 9 AM and 9 PM. There are 4 - 15 amp sockets that can charge 4 vehicles in parallel.  This is a covered charging station, which is very useful during monsoon season.  Mr Allaudin is very cheerful and fun guy to hang out with. He will guide you on any local requests.  Also he can take care of small repairs.  There is Hotel Kamat, Dukes Retreat for great lunch options nearby. Breathtaking viewpoints are just 5 minutes away. Don't miss Rajmachi Point!",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -58,7 +36,8 @@ export default function App() {
           "address": "4 Seasons Farmhouse Society, Near Songbirds township, Bhugaon, Plot Number 32, phase 3, near Club House, Paud Road, Pune, Maharashtra 411023, India",
           "notes": "The charging station is available 7 days a week between 9 AM and 4 PM on winter and from 9 AM to 5 PM in summers. There are 2 - 15 amp sockets that can charge 2 vehicles in parallel. This is a covered charging station, which is very useful during monsoon season. Mr Sagar's family are extremely fun to hang out with. You can learn a lot about electric cars, Solar power systems and sustainable living. This station is ideal to top up charge when coming from Lavasa or Temghar Dam back to Pune.  From the main road, look for the sign of - Songbirds township and the station is located 3 km on a hill. Breathtaking viewpoints are just 5 minutes away. Don't miss spectacular view of NDA!",
           "isValidated": "1",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -77,6 +56,8 @@ export default function App() {
           "address": "Behind Fountain Inn Hotel, Aundh Annexe, Rahatani, Pune, Maharashtra 411017, India",
           "notes": "The charging station is available between 9 AM and 9 PM. There are 3, charge points (15 Amp) for electric vehicles",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -96,6 +77,8 @@ export default function App() {
           "address": "Bhau Patil Rd, Bapodi Gaothan, Bopodi, Pune, Maharashtra 411003, India ",
           "notes": "The charging station is available between 9 AM and 9 PM. There is 1, charge points (15 Amp) for Mahindra Reva electric cars ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -115,6 +98,8 @@ export default function App() {
           "address": "Talegaon – Chakan Road (3 k.m. away from Pune Mumbai highway), Pune, Maharashtra, India",
           "notes": "The charging station is available between 9 AM and 9 PM. There is 1, charge points (15 Amp) for Mahindra Reva electric cars",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -134,6 +119,8 @@ export default function App() {
           "address": "Dehu-Katraj Bypass Road, Pune-Mumbai Highway, Nr. Lekha Farm, NH-4, Kiwale, Pune, Maharashtra, India",
           "notes": "The charging station is available between 9 AM and 9 PM. There is 1, charge points (15 Amp) for Mahindra Reva electric cars",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -153,6 +140,8 @@ export default function App() {
           "address": "MIDC Industrial Area, Shiravane, Nerul, Navi Mumbai, Maharashtra",
           "notes": "The charging station is available 7 days a week between 9:30 AM and 8 PM. There are 2 - 15 amp sockets that can charge 2 vehicles in parallel",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -172,6 +161,8 @@ export default function App() {
           "address": "Moiz Apartments, 12th Road, Santacruz (East), Mumbai 400055, Maharashtra, India. Landmark: Above Upadhyaya Nursing Home",
           "notes": "The charging station is available 7 days a week for 24 hours. There is a 15 amp socket that can charge an EV.  Lots of Food options, nearby.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -191,6 +182,8 @@ export default function App() {
           "address": "F 32/2, Okhla Industrial Estate - Phase 2, New Delhi - 110020",
           "notes": "The phone will be answered between 9 AM and 6 PM Monday to Friday. At any other time, there is a 24 hour guard who will allow emergency charging",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -210,6 +203,8 @@ export default function App() {
           "address": "India Expo Mart Cir, Knowledge Park II, Greater Noida, Uttar Pradesh 201310, India",
           "notes": "The phone will be answered between 9 AM and 6 PM Monday to Friday. The station will also be available during office hours.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -229,6 +224,8 @@ export default function App() {
           "address": "97 C, Block C2, BK Dutt Colony, New Delhi, Delhi 110003, India",
           "notes": "At all reasonable times , late evening the owners charge their electric car. During the day it is accessible",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -247,7 +244,9 @@ export default function App() {
           "contact": "Mr Om Singh Chauhan",
           "address": "N.H 8 (Delhi to Jaipur) near Jungle Babbler Resort, Dharuhera, Haryana",
           "notes": "The station will be available between 9 AM and 9 PM, all days a week. At any other time, there is a 24 hour guard who will allow emergency charging. The Jungle Babbler is a very good option for lunch and dinner. Just 5 minute walk away.",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -267,6 +266,8 @@ export default function App() {
           "address": "Mahindra Showroom, Delhi Road, Alwar, Rajasthan - 301001",
           "notes": "The station will be available between 9 AM and 9 PM, all days a week. At any other time, there is a 24 hour guard who will allow emergency charging. Prem Pavitra Bhojnalaya is a very good option for lunch/dinner near the Bus Stand. Take a share auto to get there.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -286,6 +287,8 @@ export default function App() {
           "address": "A-89, Sector 63, Noida",
           "notes": "The station will be available at all times - 24/7, all days a week. The phone will be answered in day time. There are 2 15 Amp sockets. Security guards are available and will help round the clock. ​Lot of food places - Like Haldiram , Yellow Chilli etc",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -305,6 +308,8 @@ export default function App() {
           "address": "HMV PRODUCTS, Shah Sarbatwale, Katraj-Dehu Road, Pune",
           "notes": "The charging station is available between 9 AM and 6 PM.  Thursday Holiday. There are 2 charge points (15 Amp) sockets for all Electric Vehicles",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -324,6 +329,8 @@ export default function App() {
           "address": "128/3/1,Barangani mala,Nanded phata-Dhayari rd., Dhayari, DSK Vishwa, Dhayari, Pune, Maharashtra 411041, India",
           "notes": "The charging station is available Monday to Saturday. 9 AM to 7 PM. Except Thursdays, which is a holiday. There are 2 charge point (15 Amp) sockets for all Electric Vehicles",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -343,6 +350,8 @@ export default function App() {
           "address": "Starbucks lane, 3rd bungalow on the right Manikanchan. Opp Dakshin Mukhi Maruti mandir beside Bansal classes",
           "notes": "The charging station is available 24 hours. There are 5 charge points (15 Amp) sockets for all Electric Vehicles",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -362,6 +371,8 @@ export default function App() {
           "address": "Sr.No. 43/1, 44/1/1, Near to Pashan Sus Bridge, Pune, Maharashtra 411045, India",
           "notes": "The charging station is available 6 days a week from 9.30am to 6.30pm. There are 3 charge point (15 Amp) sockets for Mahindra electric cars",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -381,6 +392,8 @@ export default function App() {
           "address": "247,, Kaspate Vasti Rd, Kaspate Wasti, Wakad, Pine/Pimpri-Chinchwad, Maharashtra 411057, India",
           "notes": "The charging station is available 6 days a week from 9.30am to 6.30pm. There are 3 charge point (15 Amp) sockets for Mahindra electric cars",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -400,6 +413,8 @@ export default function App() {
           "address": "B-5/30, 2nd floor, sector 17, Rohini, Delhi-89",
           "notes": "The station will be available at all times - 24/7, all days a week. The phone will be answered in day time. There are 2 15 Amp sockets. The home is 4 kms from karnal bypass.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -419,6 +434,8 @@ export default function App() {
           "address": "10 stone building, Marine Drive, Mumbai, Maharashtra 400020",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -438,6 +455,8 @@ export default function App() {
           "address": "S.V.Road & Junction,, Zalawad Nagar, Juhu Lane, Yadav Nagar, Andheri West, Mumbai, Maharashtra 400058",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -456,7 +475,9 @@ export default function App() {
           "contact": "Mr Amol Vaishampayan",
           "address": "Sanjar Enclave, Opp Milan Cinema, Near Shoppers Stop, S.V Road, Kandivali West, Mumbai, Maharashtra 400067",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -476,6 +497,8 @@ export default function App() {
           "address": "Mahindra Towers,Media Cube, G. M. Bhosale Marg, Worli,Mumbai, Maharashtra 400018",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -495,6 +518,8 @@ export default function App() {
           "address": "Akruli Road, Kandivali, Mumbai, Maharashtra 400101",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -514,6 +539,8 @@ export default function App() {
           "address": "BANGALORE NEWAIRPORT PARKING LOCATION AT P2&P3,Near DEVANHALLI,BANGALORE 562300,KARNATAKA",
           "notes": "There are 0 15A socket and number of WMC is 4.The status of 30-09-15 is 2 are working and remark is CAR PARKING BAYS ARE AT P2 & P4 PARKING AREA.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 230v,voltage between L & E is 230v and volatge between N & E is 2v.There is NA RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -533,6 +560,8 @@ export default function App() {
           "address": "M & M Dealer,108/2,1St Cross,M.S.R. Layout, Opp. Multiplex Theatre Behind Bhagini Palace Restaurant, MARATHALLI, Bangalore 560037,KARNATAKA",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 30-09-15 is 1 are working and remark is ONLY ONE CAR CAN PARK & CHARGE.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 220v,voltage between L & E is 221v and volatge between N & E is 2v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -552,6 +581,8 @@ export default function App() {
           "address": "600/677, Bilekahalli, Opposite-IIMB, Bannerghatta Main Road, Bangalore 560078,KARNATAKA",
           "notes": "There are 1 15A socket and number of WMC is 1.The status of 30-09-15 is 2 are working and remark is ONLY ONE CAR CAN PARK & CHARGE.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 235v,voltage between L & E is 235v and volatge between N & E is 2v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -571,6 +602,8 @@ export default function App() {
           "address": "MAHINDRA ELECTRIC VEHICLES PVT LTD,122E BOMMASANDRA IND.AREA,BOMMASANDRA JIGANI LINK ROAD,KOPPA, Bangalore 560099,KARNATAKA",
           "notes": "There are 4 15A socket and number of WMC is 4.The status of 30-09-15 is 8 are working.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 231v,voltage between L & E is 235v and volatge between N & E is 2v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -590,7 +623,9 @@ export default function App() {
           "address": "#839/3.24TH MAIN HSR LAYOUT,BEHIND THIRUMALA THEARE,AGARA POST,HSR LAYOUT FIRST SECTOR , BANGALORE 5600102, KARNATAKA",
           "notes": "There are 2 15A socket and number of WMC is 0.The status of 30-09-15 is 2 are working and remark is 24X7 CHARGE POINT AVAILABLE FOR PUBLIC.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 232v,voltage between L & E is 231v and volatge between N & E is 2v.There is NA RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
+
         },
         "geometry": {
           "coordinates": [
@@ -609,7 +644,8 @@ export default function App() {
           "address": "No.13/11, Rupena Agrahara Near Silk Board, Hosur Main Road Bangalore - 560068, KARNATAKA",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 30-09-15 is  are working.The number of charging points is 1 and avialable charging time is 9AM TO 5PM.There is voltage between L & N is 234v,voltage between L & E is 231v and volatge between N & E is 4v.There is no RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 0,
         },
         "geometry": {
           "coordinates": [
@@ -628,7 +664,9 @@ export default function App() {
           "address": "No 5 & 6, Yelhanka Bypass Road Landmark Next Cafe Coffee Day, Yelhanka Bangalore - 560064, KARNATAKA",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 30-09-15 is  are working.The number of charging points is 1 and avialable charging time is 24*7.There is voltage between L & N is 238v,voltage between L & E is 235v and volatge between N & E is 3v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
+
         },
         "geometry": {
           "coordinates": [
@@ -647,7 +685,8 @@ export default function App() {
           "address": "The Forum mall, 21, Hosur Road, Koramangala, Bangalore - 560099, KARNATAKA",
           "notes": "There are 1 15A socket and number of WMC is 1.The status of 30-09-15 is  are working.The number of charging points is 1 and avialable charging time is 11AM  TO 10PM.There is voltage between L & N is 240v,voltage between L & E is 237v and volatge between N & E is 2v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -666,7 +705,9 @@ export default function App() {
           "address": "No.62, Whitefield Main Road, Whitefield,Bangalore - 560066, KARNATAKA",
           "notes": "There are 0 15A socket and number of WMC is 1.The status of 30-09-15 is  are working and remark is WITH REVA CAR CHARGE CABLE.The number of charging points is 1 and avialable charging time is 11AM  TO 10PM.There is voltage between L & N is 238v,voltage between L & E is 240v and volatge between N & E is 3v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
+
         },
         "geometry": {
           "coordinates": [
@@ -685,7 +726,9 @@ export default function App() {
           "address": "# 1, Palace Cross Road, Bangalore - 560020, KARNATAKA",
           "notes": "There are 0 15A socket and number of WMC is 1.The status of 30-09-15 is  are working.The number of charging points is 1 and avialable charging time is11AM  TO 6PM.There is voltage between L & N is 236v,voltage between L & E is 240v and volatge between N & E is 1v.There is yes RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
+
         },
         "geometry": {
           "coordinates": [
@@ -704,6 +747,8 @@ export default function App() {
           "address": "12,Moledina Road,Pune, Maharashtra 411001",
           "notes": "There are 2 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -723,6 +768,8 @@ export default function App() {
           "address": "131/B,Hadapsar Industrial Estate, Nr.Tata Honeywell, Shinde Vasti,Pune, Maharashtra 411001",
           "notes": "There are 1 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.The status of 24-Dec-14 is Working and Accessible to public.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -742,7 +789,9 @@ export default function App() {
           "address": "Shikrapur, Pune District, Maharashtra 411001",
           "notes": "There are 2 15A socket for which the charge point available timing was 10:00 to 18:00 Hrs and number of WMC is 0.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
+
         },
         "geometry": {
           "coordinates": [
@@ -761,7 +810,8 @@ export default function App() {
           "address": "Baramati,Pune, Maharashtra 411001",
           "notes": "",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -780,7 +830,8 @@ export default function App() {
           "address": "20/2 Mathura Road Near YMCA Chowk Faridabad(Haryana) , Near by Escort Mujesar Metro Station, Faridabad",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 24-Dec-14 is Functional and remark is Functional,Portable charging cable required.The number of charging points is 1 and avialable charging time is any time.There is voltage between L & N is 230v,voltage between L & E is 230v and volatge between N & E is 2v.There is no RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 0,
         },
         "geometry": {
           "coordinates": [
@@ -799,7 +850,8 @@ export default function App() {
           "address": "55 Rama Rd Indl. Area, Motinagar, Block B, Najafgarh Road Industrial Area, New Delhi, Delhi 110015",
           "notes": "There are 1 15A socket and number of WMC is 1.The status of 24-Dec-14 is Functional and remark is Functional.The number of charging points is 2 and avialable charging time is any time.There is voltage between L & N is 236v,voltage between L & E is 236v and volatge between N & E is 70v.There is no RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 2.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -818,7 +870,8 @@ export default function App() {
           "address": "A-9,Sector-2,Opp Indian Oil Bldg, Noida",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 24-Dec-14 is Functional and remark is Functional.The number of charging points is 1 and avialable charging time 10:00 to 06:00 pm.There is voltage between L & N is 220v,voltage between L & E is 220v and volatge between N & E is 1v.There is no RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -837,7 +890,8 @@ export default function App() {
           "address": "Plot No.550 Gali No D-18 Chhattarpur Pahari 100 Futa Road New Delhi",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 24-Dec-14 is Functional and remark is Functional,Portable charging cable required.The number of charging points is 1 and avialable charging time is 10:00 to 07:30 pm.There is voltage between L & N is 240v,voltage between L & E is 240v and volatge between N & E is 0v.There is no RCD cable working,charging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -856,7 +910,8 @@ export default function App() {
           "address": "B 72/4 , WAZIRPUR INDUSTRIAL AREA , DELHI, B 72/4, WAZIRPUR, Delhi 110052",
           "notes": "There are 1 15A socket charging time is 10:00 to 06:00 pm.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -875,6 +930,8 @@ export default function App() {
           "address": "2A Bhikaji Cama Place New Delhi-66",
           "notes": "There are 1 15A socket and number of WMC is 1.The status of 24-Dec-14 is Functional and remark is Functional.The number of cahrging points is 1 and avialable charging time is NA.There is voltage between L & N is 236v,voltage between L & E is 236v and volatge between N & E is 2v.There is no RCD cable working,chrging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -894,7 +951,8 @@ export default function App() {
           "address": "A-40 Mohan Co operative estate, New Delhi",
           "notes": "There are 1 15A socket and number of WMC is 0.The status of 24-Dec-14 is Functional and remark is Functional.The number of cahrging points is 1 and avialable charging time is 09:00 am to 07:30 pm.There is voltage between L & N is 230v,voltage between L & E is 230v and volatge between N & E is 2v.There is no RCD cable working,chrging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -913,7 +971,8 @@ export default function App() {
           "address": "66KV Grid Sub-station Sector-3 Rohini, near NDPL Shakti Deep Building, Delhi-85",
           "notes": "There are 0 15A socket and number of WMC is 1.The status of 24-Dec-14 is Functional and remark is Functional.The number of cahrging points is 1 and avialable charging time is any time.There is voltage between L & N is 240v,voltage between L & E is 240v and volatge between N & E is 3v.There is no RCD cable working,chrging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -932,7 +991,8 @@ export default function App() {
           "address": "66KV Grid Sub-Station Pitampura-1, Outer Ring Road, Near Madhuban Chowk,  Pitampura, New Delhi-110088",
           "notes": "There are 0 15A socket and number of WMC is 1.The status of 24-Dec-14 is Functional and remark is Functional.The number of cahrging points is 1 and avialable charging time is any time.There is voltage between L & N is 220v,voltage between L & E is 220v and volatge between N & E is 3v.There is no RCD cable working,chrging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 0,
         },
         "geometry": {
           "coordinates": [
@@ -951,7 +1011,8 @@ export default function App() {
           "address": "TATA POWER DELHI DISTRIBUTION LIMITED ,NEAR SACHDEVA PUBLIC SCHOOL, SECTOR-15, ROHINI,DELHI -110089 ",
           "notes": "There are 0 15A socket and number of WMC is 1.The status of 24-Dec-14 is Functional and remark is Functional.The number of cahrging points is 1 and avialable charging time is any time.There is voltage between L & N is 230v,voltage between L & E is 230v and volatge between N & E is 3v.There is no RCD cable working,chrging point status is working and parking space is avialable.Charging point working is feasible.Number of ports installed is 1.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -970,6 +1031,8 @@ export default function App() {
           "address": "120 Bharathnagar 2nd stage, Prakruthi Nagar, vishwaneedam Post, Bangalore - 560091, ​Near CII IQ office. Very near to Magadi main road NICE intersection",
           "notes": "The charging station is available 7 days a week between 7.00AM TO 10.00PM. There is a 15 amp socket that can be used for all electric vehicles. Please call before going. Lots of open places to walk around, A bakery near by. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -989,6 +1052,8 @@ export default function App() {
           "address": "# 39 Middle School Road V.V Puram, Bangalore, Karnataka 560004, India",
           "notes": "The charging station is available 7 days a week between 9.00AM TO 9.00PM. There is a 15 amp socket that can be used for all electric vehicles.             Please call before going. Lalbagh is near by.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1007,7 +1072,9 @@ export default function App() {
           "contact": "Mr. Sachin",
           "address": "@ Hotel Vishram near Vedant Cranes factory, Wai Taluka, Maharashtra",
           "notes": "The charging station is available all days a week for 24 hours. There are 2 charge point (15 Amp) sockets for all electric vehicles. Sachin makes good snacks like Poha, Omelette etc. in his shop.  Also there are nice trails around the shop for walks amidst spectacular Mountain views",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1027,6 +1094,8 @@ export default function App() {
           "address": "Wai Surur Road 412803, Wai, Maharashtra 412803, India",
           "notes": "The charging station is available all days a week from 9 AM to 8 PM. There are 2 charge point (15 Amp) sockets for all electric vehicles. MAPRO Cafetaria serves good food and a fun food park to explore and enjoy the serene atmosphere.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1046,6 +1115,8 @@ export default function App() {
           "address": "Nagar-Pune Road Belwadi Phata, Maharashtra 413702, India",
           "notes": "The charging station is available all days a week from 9 AM to 6:30 PM. There is 1 charge point (15 Amp) socket for all electric vehicles. Nearby restaurants available.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1065,6 +1136,8 @@ export default function App() {
           "address": "L&T Housing Complex, near Daule Hospital, Savedi, Ahmednagar, Maharashtra 414003, India",
           "notes": "Community charging station available for all EVs from 9 AM to 7 PM.  One 15 Amp socket available.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1084,6 +1157,8 @@ export default function App() {
           "address": "Microtek Industries, MIDC, Ahmednagar, Maharashtra 414003, India",
           "notes": "Community charging station available for all EVs from 9 AM to 7 PM.  One 15 Amp socket available.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -1103,6 +1178,8 @@ export default function App() {
           "address": "Hotel Ganpati Palace Rd, Shirdi, Maharashtra 423109, India",
           "notes": "Community charging station available for all EVs from 9 AM to 7 PM.  One 15 Amp socket available. Better take a 15 meter extension chord.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1122,7 +1199,8 @@ export default function App() {
           "address": "St Laurn Meditation Spa & Resort, Rui- Shiv Road, Shirdi, Maharashtra 423109, India",
           "notes": "Community charging station available for all EVs from 9 AM to 7 PM.  One 15 Amp socket available in the basement.",
           "isValidated": "0",
-          
+          "netPorts": 5,
+          "avlPorts": 3,
         },
         "geometry": {
           "coordinates": [
@@ -1141,6 +1219,8 @@ export default function App() {
           "address": "Near the Mandir, Tikona-Peth Village, Maharashtra, India",
           "notes": "The charging station is available all days a week from 9 AM to 7 PM. There is 1 charge point (15 Amp) sockets for all electric vehicles. ​Stunning views of Pavana lake, just 10 min walk away.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1160,6 +1240,8 @@ export default function App() {
           "address": "Pune - Bengaluru Hwy, Shindewadi, Maharashtra 412801",
           "notes": "Pune Community member charged once.  It is better to have something at the restaurant",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1179,6 +1261,8 @@ export default function App() {
           "address": "36, Shopping Center, Janta Colony, Jaipur, India ",
           "notes": "The charging station is available 24 hours a day and supports Mahindra e2o, and all other EVs but you need to have to bring your own charger",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1198,6 +1282,8 @@ export default function App() {
           "address": "Flat no 1027, Sector-29, Noida - 201 301",
           "notes": "The charging station is available between 8.00 a.m. till 10.00 p.m and supports Mahindra e2o, and all other EVs. Please send a request msg on the number provided before coming. Please tell the guard that you want to charge your electric vehicle at flat 1027's garage and he will let you in. You will be asked to fill in your details in the register.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1217,6 +1303,8 @@ export default function App() {
           "address": "# 5 / 37/ 2 Neetha Lodge Road, 500 mts from Sai Baba Temple, Shirdi",
           "notes": "The charging station is available between 8.00 a.m. till 10.00 p.m and supports all electric vehicles",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1235,7 +1323,9 @@ export default function App() {
           "contact": "Reception",
           "address": "8 & 9, O’Shaughnessy Road, Langford Gardens, Bangalore, Karnataka 560025, India",
           "notes": "The charging station is available 24 hours and supports all electric vehicles",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1255,6 +1345,8 @@ export default function App() {
           "address": " B 130, Sector 63, Noida",
           "notes": "The charging station is available between 9 am to 6 pm on working days and supports all electric vehicles. Please sms/WhatsApp your name and car number and call before coming.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1274,6 +1366,8 @@ export default function App() {
           "address": "553, F block (IOB Building), Sahakaranagar , Bangalore ",
           "notes": "The charging station is available between 8am to 8pm and supports Mahindra electric cars. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1293,6 +1387,8 @@ export default function App() {
           "address": "Mission Quarters, Thrissur, Kerala",
           "notes": "The charging station is available between 10am to 6pm and supports Mahindra electric cars.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1312,6 +1408,8 @@ export default function App() {
           "address": "2/1, Veerapandi Nagar, 1st Street, Choolaimedu, Chennai, Tamil Nadu 600094",
           "notes": "The charging station is available between 10am to 6pm and supports all electric vehicles.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -1331,6 +1429,8 @@ export default function App() {
           "address": "Trinetra Petrol Pump, Mumbai-Pune Express Highway, near Lonavala Toll Plaza, Lonavala, Pune District",
           "notes": "The charging station is available 24 hours and supports all electric vehicles. There are two 15 Amp sockets. The Pune-Mumbai EV community uses this one heavily!",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1350,6 +1450,8 @@ export default function App() {
           "address": "Hegde Accessories and Components, 15B /8 D 1 block MIDC Chinchwad, Pune 411019",
           "notes": "The charging station is Solar powered and is available 8 AM to 8 PM and supports all electric vehicles. There is one 15 Amp socket. Landmarks near Garware Wall Ropes and Kinetic",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1369,6 +1471,8 @@ export default function App() {
           "address": "No.4, 1st B Main, Atmananda Colony, Sultanpalya, R.T Nagar extn, Bangalore",
           "notes": "The charging station has a 15Amp 3Pin socket.  This charge point is for Emergency or Top Up needs only. Avoid normal charging.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1388,6 +1492,8 @@ export default function App() {
           "address": "Survey no 73,Medchal,NH-07,opp Suchitra Circle,Jedimetla, Secundrabad",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1407,6 +1513,8 @@ export default function App() {
           "address": "8571,Rastrapati Road, Ranigunj Secundrabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1426,6 +1534,8 @@ export default function App() {
           "address": "#16-10-35/2,Besides Bus Stop,Nalagonda X Roads,Malakpet, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1444,7 +1554,9 @@ export default function App() {
           "contact": "Mr.Vijay",
           "address": "DNO- 172/2,Nr.Manjeera Reservior,Hydernagar,Kukatpally, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1464,6 +1576,8 @@ export default function App() {
           "address": "Plot No- 9-12,Block-42,NH-09,Autonagar,Vijaywada Highway, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1483,6 +1597,8 @@ export default function App() {
           "address": "8-2-248/1/7/13, Nagarjuna Circle,Punjagutta, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1502,6 +1618,8 @@ export default function App() {
           "address": "Plot No 16-2-705/10/C, Super Bazaar Road, Malakpet, Opposite Pranathi Junior College, Beside Municipal Market, Andhra Bank Colony, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1521,6 +1639,8 @@ export default function App() {
           "address": "Kothaguda X Roads Old Bombay Highway Near Hightech City,Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -1540,6 +1660,8 @@ export default function App() {
           "address": "Pillar No-82,Attaput,Mehdipatnam, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1559,6 +1681,8 @@ export default function App() {
           "address": "Plot No- B-3,IDA Uppal, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1578,6 +1702,8 @@ export default function App() {
           "address": "86 A, Topsia Road,Haute Street Building, Kolkata ",
           "notes": "Charging Infra available at the showroom and the same can be made available for charging customer’s vehicles during office hours.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1597,6 +1723,8 @@ export default function App() {
           "address": "NH- 47, BYE PASS ROAD ELANTHURUTHI,KUTTANALLOOR.P.O, THRISSUR ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1616,6 +1744,8 @@ export default function App() {
           "address": "Neeramankara, Kaimanam P.O., THRISSUR ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1635,6 +1765,8 @@ export default function App() {
           "address": "Hyderguda Road, Himayat Nagar, Opposite Old Mla Quaters, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1653,7 +1785,9 @@ export default function App() {
           "contact": "Krishna Mohan",
           "address": "Plot No 28 & 29, Opp. N Convention, Hitech City Main Road, Hitech City, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1673,6 +1807,8 @@ export default function App() {
           "address": "Sagar Ring road,Alekhya towerd opposite, LB nagar, Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1692,6 +1828,8 @@ export default function App() {
           "address": "Kompally, Rangareddy, Opposite John Deer Tractor Showroom , Hyderabad ",
           "notes": "The charging station has a 15Amp 3Pin socket or a e2o Wall Mounted Unit.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1711,6 +1849,8 @@ export default function App() {
           "address": "161/21,Kaikhali, Ghoshpara, Kolkata ",
           "notes": "The charging station has a 15 amp socket.  Available from 11am to 8pm",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1730,6 +1870,8 @@ export default function App() {
           "address": "AMBIENT, BLOCK-AQ, SECTOR-V, NEAR IIPM, SALT LAKE CITY, Kolkata ",
           "notes": " Charging Infra available and as per discussion with the Sales Manager, he confirmed that the charging infra can be made available for charging customer’s vehicles during office hours.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1749,6 +1891,8 @@ export default function App() {
           "address": "K.S. Motors Pvt. Ltd., M.I. Road, Jaipur, ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -1768,6 +1912,8 @@ export default function App() {
           "address": "K.S. Motors Pvt. Ltd, PDI Center  National Motor Building , Jaipur, ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1787,6 +1933,8 @@ export default function App() {
           "address": "D-59, Gujarat Ambuja, Complex, Anand Circle, Niwaru Road, Jhotwara Industrial Area, Jaipur, ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1806,6 +1954,8 @@ export default function App() {
           "address": "B-1, Sector-5, Near Pratap Plaza, Pratap Nagar, Tonk Road, Jaipur, Shahpura ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1825,6 +1975,8 @@ export default function App() {
           "address": "Sitapura Industrial Area, Jaipur, Shahpura ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1844,6 +1996,8 @@ export default function App() {
           "address": "55-57, Vishwa Nagar, Near Sanganer Road, Near Gujar Ki thadi, Jaipur ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1862,7 +2016,9 @@ export default function App() {
           "contact": "",
           "address": "Mahindra Towers, Durgapura, Jaipur ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1882,6 +2038,8 @@ export default function App() {
           "address": "Near Poddar Pigment workshop, Sitapura Industrial Area, Jaipur ",
           "notes": "The charging station has a e2o Wall Mounted Unit.  Available from 10:00 to 20:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1901,6 +2059,8 @@ export default function App() {
           "address": "1001, OPP DGP office,  Sector 28, Gandhinagar ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 9:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1920,6 +2080,8 @@ export default function App() {
           "address": "Luxmi Switchgears Pvt Ltd, Plot No-82, Industrial Area,Phase-I, Chandigarh ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -1939,6 +2101,8 @@ export default function App() {
           "address": "Village Singpura, Chandigarh Ambala Highway, Tehsil Derabasi, Chandigarh ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1958,6 +2122,8 @@ export default function App() {
           "address": "Plot No- 33, Phase- I,Industrial Area, Chandigarh ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1977,6 +2143,8 @@ export default function App() {
           "address": "E 179, Industrial Area, Phase-VII, Chandigarh ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -1996,6 +2164,8 @@ export default function App() {
           "address": "B-55,C-6,Industrial Area, Opp.Vedika Milk Plant, Chandigarh ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2015,6 +2185,8 @@ export default function App() {
           "address": "12/43-C FEROKE-CHUNGAM FEROKE, CALICUT  ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2034,6 +2206,8 @@ export default function App() {
           "address": " Opp.ISCON Mall Flyover ,S.G Highway, Ahmedabad ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 9:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2053,6 +2227,8 @@ export default function App() {
           "address": "Nr Sundaram Arcade Complex, sukan Mall cross road, Science City Road, Sola, Ahmedabad ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 9:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2071,7 +2247,9 @@ export default function App() {
           "contact": "",
           "address": "Nr.New High Court, Sola Flyover Bridge,S.G.Highway, Ahmedabad ",
           "notes": "The charging station has a e2o Wall Mounted Unit and 15 Amp socket.  Available from 9:00 to 18:00 Hrs",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2091,6 +2269,8 @@ export default function App() {
           "address": "1/688 Tatibandh, Raipur ",
           "notes": "The charging station has a e2o Wall Mounted Unit combatible to Mahindra e2o.  Available from 10:00 to 18:00 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2110,6 +2290,8 @@ export default function App() {
           "address": "Karjat-Murbad Rd., Karjat ",
           "notes": "The charging station has a 15 Amp socket 2 charge all EVs.  Available 24 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2129,6 +2311,8 @@ export default function App() {
           "address": "On Ahmednagar-Pune Road after Shirur",
           "notes": "The charging station has 3 15 Amp sockets and all are Solar Powered.  Available 24 Hrs",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2148,6 +2332,8 @@ export default function App() {
           "address": "On Ahmednagar-Pune Road after Shirur",
           "notes": "The charging station has a 15 Amp socket.  Available 6 AM to 11 PM",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -2167,6 +2353,8 @@ export default function App() {
           "address": "619, 21st Main Rd, T Block, 4th T Block East, Pattabhirama Nagar, Jayanagara Jaya Nagar, Bengaluru, Karnataka 560041",
           "notes": "The charging station has a 15 Amp socket.  Available 9 AM to 7 PM",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2186,6 +2374,8 @@ export default function App() {
           "address": "Plot no 4/25, sector 10, PCNTDA, Bhosari ",
           "notes": "The charging station has a 15 Amp socket.  Available 9 AM to 9 PM",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2205,6 +2395,8 @@ export default function App() {
           "address": "Hotel Sangam, NH4, Pune-Bangaluru road , Karad",
           "notes": "The charging station has a 15 Amp socket.  Available 24 hours",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2224,6 +2416,8 @@ export default function App() {
           "address": "Near EC road, Mohini Road, Dehradun",
           "notes": "The charging station has a 15 Amp socket. Station  available at all times. Owners available on phone during day hours.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2243,6 +2437,8 @@ export default function App() {
           "address": "C3/13, Janakpuri, Opp. C4E Market, New Delhi",
           "notes": "The charging station has a 15 Amp socket compatible to Mahindra e2o. Available 7 am - 9 pm",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2262,6 +2458,8 @@ export default function App() {
           "address": "2227, Bank Road, M.I.E Part B, Bahadurgarh, Haryana",
           "notes": "The charging station has a 15 Amp socket compatible to Mahindra e2o. Available 7 am - 9 pm",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2280,7 +2478,9 @@ export default function App() {
           "contact": "Raphae Halim",
           "address": "Shop #4, 2nd Hasanabad Lane, Santacruz (West), Willingdon, Santacruz West, Mumbai, Maharashtra 400054, India",
           "notes": "The charging station has a 15 Amp socket compatible to Mahindra e2o and all EVs. Available 11 am - 5 pm",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2299,7 +2499,9 @@ export default function App() {
           "contact": "",
           "address": "Hotel Prasad, Kharwade on the way Temghar - Lavasa Road.",
           "notes": "The charging station has 2 15 Amp sockets for all EVs. Available 9 a.m. to 7 p.m",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2319,6 +2521,8 @@ export default function App() {
           "address": "#169 kamadhenu , shankaranagara main road , Shankaranagara, BENGALURU , 560096",
           "notes": "The charge point is compatible to Mahindra e2o and Revai. Charging for only for top up and emergency's.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2338,6 +2542,8 @@ export default function App() {
           "address": "B/22 Gurunanak Society, Thane East, Near Fire Brigade, Daulat Nagar, Thane East, Thane, Maharashtra 400603",
           "notes": "The charging station has a 15 Amp socket compatible to Mahindra e2o and all EVs. Strictly call and go.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2357,6 +2563,8 @@ export default function App() {
           "address": "Mumbai-Nashik Highway No. 3, Asangaon (w), Shahapur, Thane 421601",
           "notes": "1 Point. Available 24 hours",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2376,6 +2584,8 @@ export default function App() {
           "address": "Off Mumbai-Nashik Highway, Shahapur, Maharashtra 421601",
           "notes": "2 Points. Available. Use resort - Prior booking. Overnight picnic, camping, riverside stay, EV charging included. Facebook page: facebook.com/Ciboescape",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2395,6 +2605,8 @@ export default function App() {
           "address": "Shweta Print Pack Pvt. Ltd. F-104, MIDC-Satpur, Nashik 422007",
           "notes": "4 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2414,6 +2626,8 @@ export default function App() {
           "address": "Larsen & Toubro Ltd, H-108,  MIDC AMBAD, NASHIK 10",
           "notes": "4 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2433,6 +2647,8 @@ export default function App() {
           "address": "M-116, shop 11, Near Siemens ,behind cham cham food. MIDC Ambad Nashik 422010",
           "notes": "4 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2452,6 +2668,8 @@ export default function App() {
           "address": "Talegaon Chakan Road, Maharashtra 410501, India",
           "notes": "3 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -2471,6 +2689,8 @@ export default function App() {
           "address": "Malpani House, I.G.Road, Sangamner, Kasarwadi, Ahmednagar, Maharashtra 422605, India",
           "notes": "3 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2490,6 +2710,8 @@ export default function App() {
           "address": "Krishi Vignan Kendra, Narayangaon, Maharashtra 410504, India",
           "notes": "2 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2508,7 +2730,9 @@ export default function App() {
           "contact": "Mr Bhujbal",
           "address": "Very Near KVK , Narayangaon, Pune - Nashik Hwy, Pune, Maharashtra 410504, India",
           "notes": "1 Point. Available to charge all EV's",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2528,6 +2752,8 @@ export default function App() {
           "address": "27, R3J Residency, 1st Main, 1st Cross, MLA Layout, RT Nagar, Bangalore",
           "notes": "1 Point. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2547,6 +2773,8 @@ export default function App() {
           "address": "149 3rd C main, 6th cross 9th block Nagarbhavi 2nd stage",
           "notes": "10 AM - 5 PM. 1 Point. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2566,6 +2794,8 @@ export default function App() {
           "address": "Village Kavaudi,  Taluka Bhor, Pune. 412206",
           "notes": "24 hours. 1 Point. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2585,6 +2815,8 @@ export default function App() {
           "address": "Yashodhan bangalow, plot no:23,Pramathesh society,kothrud,pune-38 (near by mahatma society)",
           "notes": " 7:30 am to 11:30pm. 3 Points. Available to charge all EV's",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2604,6 +2836,8 @@ export default function App() {
           "address": "P 55 B, Shankar Vihar, Delhi Cantt, New Delhi 110010",
           "notes": "0900 hrs to 1800 hrs. 1 Point. Available to charge all EV's. Opposite Army Welfare Education Society",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2623,6 +2857,8 @@ export default function App() {
           "address": "PD4/5, TNPHC,Kelambakkam road,Melakottaiyur,Chennai,Tamilnadu,India, Pincode-600127",
           "notes": "24 hours. 1 Point. One 15A Charging Point with open parking",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2642,6 +2878,8 @@ export default function App() {
           "address": "855, Chandra Vatika, Chandra Parisar, Chandrabani Road, Manjra ",
           "notes": "5 am to 9 pm 1 Point. One 15A",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2661,6 +2899,8 @@ export default function App() {
           "address": "Dev heights plot 71-73 friends enclave shaberi village, Ghaziabad ",
           "notes": "5 am to 9 pm 1 Point. One 15A",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -2680,6 +2920,8 @@ export default function App() {
           "address": "Madhur Complex, Shop no 3&4, Sector CDC, Opposite to H P Petrol pump, Near PCMC RTO, Purnanagar Sector CDC, Chinchwad ",
           "notes": "9.30am to 8pm. Two 5A 230VAC plug suitable for charging electric scooter and electric bicycle only.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2699,6 +2941,8 @@ export default function App() {
           "address": "692/5B 'Suraj', Nandadeep Society, Near Hotel Tiranga, Pune Satara Road, 411037 ",
           "notes": "5 am to 9 pm 1 Point. One 15A",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2718,6 +2962,8 @@ export default function App() {
           "address": "2/7 Meghal Industrial Estate, Devidayal Road, Mulund West, Mumbai, Maharashtra 400080",
           "notes": "5 am to 9 pm 1 Point. One 15A",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2736,7 +2982,9 @@ export default function App() {
           "contact": "Office",
           "address": "SEP-2, B- East Pirojshanagar,, 3, Vikhroli Village Rd, Pirojshanagar, Vikhroli East, Mumbai, Maharashtra 400079",
           "notes": "5 am to 9 pm 1 Point. Type 2 Cable provided for e2o Plus P8. Contact company for other adapters. There is a DC quick charger too for e-Verito and e2o Plus P8",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2756,6 +3004,8 @@ export default function App() {
           "address": "Pheonix MarketCity, Lal Bahadur Shastri Marg, Kurla West, Kurla, Kamani, Ashok Nagar, Kurla, Mumbai, Maharashtra 400070",
           "notes": "24 hours. Type 2 Cable and IEC cable provided for e2o Plus P8, P6, Classic e2o and e-Verito.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2775,6 +3025,8 @@ export default function App() {
           "address": "462, Senapati Bapat Marg, Lower Parel, Mumbai, Maharashtra 400013",
           "notes": "24 hours. 1 slow AC chargers. Type 2 Cable and IEC cable provided for e2o Plus P8, P6, Classic e2o and e-Verito.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2794,6 +3046,8 @@ export default function App() {
           "address": "ibis & Novotel Bengaluru Techpark, Opposite RMZ Ecospace Business Park, Marathahalli - Sarjapur Outer Ring Road, Bengaluru – 560103, Karnataka, India",
           "notes": "24 hours. 2 nos 15 Amp sockets",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2813,6 +3067,8 @@ export default function App() {
           "address": "No.93/22, B Mundwa, Koregaon Park Road, Magarpatta City, Mundhwa, Pune, Maharashtra 411036",
           "notes": "Charge point compatibility: mahindra e2O, mahindra e2O plus",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2832,6 +3088,8 @@ export default function App() {
           "address": "Swissôtel Kolkata, City Centre New Town | Action Area 2 D| Plot No. 11/5 | New Town, Rajarhat | Kolkata -700 157,West Bengal, India",
           "notes": " 2 nos 15 Amp sockets",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2851,6 +3109,8 @@ export default function App() {
           "address": "38/4, Kensington Rd, Sindhi Colony, Pulikeshi Nagar, Bengaluru - 560042",
           "notes": "The charging station is available 6 days a week between 9:30 AM and  10 PM. Closed on Mondays. There is one Ather Grid Point with a 15 Amp socket.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2870,6 +3130,8 @@ export default function App() {
           "address": "915, Kenchena Halli Rd, Remco Bhel Layout, Kenchenhalli, RR Nagar, Bengaluru - 560098",
           "notes": "The charging station is available days 7 a week between  11 AM and  11 PM. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2889,6 +3151,8 @@ export default function App() {
           "address": "284, Outer Ring Rd, Kathriguppe IV Phase, Banashankari 3rd Stage, Banashankari, Bengaluru-560070",
           "notes": "The charging station is available days 7 a week between  11 AM and  11 PM. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -2908,6 +3172,8 @@ export default function App() {
           "address": "749/1, Airavatha Building, Kengeri, Bengaluru - 560059",
           "notes": "The charging station is available 7 days a week, 24 hours a day. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2926,7 +3192,9 @@ export default function App() {
           "contact": "Ather Customer Service",
           "address": "KGE Layout, Sanjaynagar, Bengaluru - 560054",
           "notes": "The charging station is available 7 days a week between  12 PM and 12 AM. There is one Ather Grid Point with a 15 Amp socket",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2945,7 +3213,9 @@ export default function App() {
           "contact": "Ather Customer Service",
           "address": "# 1, 15th Cross,2nd Block, Govindaraj Garden, R.T Nagar, Bengaluru - 560032",
           "notes": "The charging station is available days a week between  AM and  PM. There is one Ather Grid Point with a 15 Amp socket",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2965,6 +3235,8 @@ export default function App() {
           "address": "98/5, Davis Road, Cooke Town, Bengaluru - 560084",
           "notes": "The charging station is available 7 days a week between 8 AM and 9:30 PM. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -2984,6 +3256,8 @@ export default function App() {
           "address": "No 2, Kasturba Road, Bengaluru - 560001 ",
           "notes": "The charging station is available 7 days a week between 11 AM and 8:30 PM. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3003,6 +3277,8 @@ export default function App() {
           "address": "154, Whitefield Main Road, Opp Vijaya Bank, Whitefield, Bengaluru - 560066",
           "notes": "The charging station is available 7 days a week between 12 PM and 11:30 PM. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3022,6 +3298,8 @@ export default function App() {
           "address": "Whitefield Road, Pattandur Agrahara, Whitefield, Bengaluru - 560066",
           "notes": "The charging stations are available 7 days a week, 24 hours a day. It is a tech park with restricted access to employees and visitors. There are two Ather Grid Points with 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3041,6 +3319,8 @@ export default function App() {
           "address": "40, ITPL Main Rd, Pattandur Agrahara, Bengaluru - 560066",
           "notes": "The charging stations are available 7 days a week between 9 AM and 12 PM. There are two Ather Grid Points with 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3060,6 +3340,8 @@ export default function App() {
           "address": "53, 3rd main, 100 Feet Road, Defence Colony, Indira Nagar, Bengaluru - 560038",
           "notes": "The charging stations are available 7 days a week between 10 AM and 8 PM. There are three Ather Grid Points with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3079,6 +3361,8 @@ export default function App() {
           "address": "Bhavani Nagar, Suddagunte Palya, Bengaluru - 560029",
           "notes": "The charging station is available 7 days a week, 24 hours a day. It is a tech park with restricted access to employees and visitors. There is one Ather Grid Point with a 15 Amp socket",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3098,6 +3382,8 @@ export default function App() {
           "address": "32 J Nehru Road, Santacruz East, Mumbai 400036. Near santacruz station.",
           "notes": "2 15 Amp sockets are available 7 days a week, 24 hours a day. This is a hotel, staying guests preferred or incases of emergency. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3117,6 +3403,8 @@ export default function App() {
           "address": "Arya Hamsa Apartment, 3rd Black Basement Parking No. 3G 107, 80 Feet Road, JP Nagar Phase 8, Bangalore 560083 ",
           "notes": "1 15 Amp socket is available from 6:00 AM to 9:00 PM. Please call before coming. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3136,6 +3424,8 @@ export default function App() {
           "address": "Khushaiguda, Hyderabad, Telangana, India ",
           "notes": "1 15 Amp socket is available. Please call before coming. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3154,7 +3444,9 @@ export default function App() {
           "contact": "Hitender Yadav",
           "address": "Braham Garden, behind FunNFood Village, Kapashera, New Delhi-37 ",
           "notes": "Five - 15 Amp sockets are available 7 days a week, 24 hours a day. ",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3174,6 +3466,8 @@ export default function App() {
           "address": "NH-17, Near Birla Cross Junction, Verna, Goa",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3193,6 +3487,8 @@ export default function App() {
           "address": "BELL VISTA, SANGOLDA, Chogm Raod, Near Paper Boat, Porvorim, Sangolda, SANGOLDA, Goa 403511",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3212,6 +3508,8 @@ export default function App() {
           "address": "Shop No. 35 – 42, Cross Roads Avenue, Near Arlem Junction, Fatorda, Alpha Colony, Margao, Goa 403602",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3231,6 +3529,8 @@ export default function App() {
           "address": "Verna Industrial Estate, Verna, Goa 403722",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3250,6 +3550,8 @@ export default function App() {
           "address": "Plot no 92/93/94, Pilerne Industreal Estate, Plerne, Marra, Goa 403511",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3269,6 +3571,8 @@ export default function App() {
           "address": "Plot No 128, phase III, Kakoda Industrial Estate, Churchorem, Goa 403706., Churchorem, Goa, 403706",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3288,6 +3592,8 @@ export default function App() {
           "address": "NH- 5, Bamphakuda, Phulnakhara, Police Colony, Madhu Patna Colony, Cuttack, Odisha 753013",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3307,6 +3613,8 @@ export default function App() {
           "address": "Plot No -64, Near Pnb Bank, Sai Mandap, Atharnalla, Po-Gopinathpurdist-Puripin-7, Nilachakra Nagar, Puri, Odisha 752002",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3326,6 +3634,8 @@ export default function App() {
           "address": "PRESHITHA COMPLEX, 116 VINLLIANUR MAIN ROAD, REDDIYARPALAYAM, Reddiarpalayam, REDDIYARPALAYAN_SR, Puducherry 605010",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3345,6 +3655,8 @@ export default function App() {
           "address": "Pillayarkuppam, Puducherry 607402",
           "notes": "15 Amp sockets are available 6 days a week, during business hours. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3363,7 +3675,9 @@ export default function App() {
           "contact": "Nilesh Peshkar",
           "address": "City Space, opp Inorbit Mall, Viman Nagar, Clover Park, Viman Nagar, Pune, Maharashtra 411014",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3383,6 +3697,8 @@ export default function App() {
           "address": "UBALE NAGAR, NEAR JAIBHAIRAVNATH WAREHOUSE, CHOKHI-DHANI ROAD, WAGHOLI, PUNE, WAGHOLI, Maharashtra 412207",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3402,6 +3718,8 @@ export default function App() {
           "address": "Mouza Khairi, Nr Mhks-Bpcl Petrol Pump, Kampthee Road, Nagpur, Mah, Nagpur, Maharashtra 440026",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3421,6 +3739,8 @@ export default function App() {
           "address": "G-17/18, Central MIDC, Hingna Rd, Nagpur, Maharashtra 440028",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3440,6 +3760,8 @@ export default function App() {
           "address": "Ratnaprbha Motors, MIDC Chikalthana, Opp. Wockhardt Research Centre, Aurangabad",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3459,6 +3781,8 @@ export default function App() {
           "address": "Ground Floor, Jaswanti Landmark, LBS Marg, Vikhroli West, Godrej & Boyce Industry Estate, Vikhroli West, Mumbai, Maharashtra 400079",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3478,6 +3802,8 @@ export default function App() {
           "address": "B-188, M I D C Ambad, Patherdi Bridge, Next To Taj Residency, M I D C Ambad, MIDC Ambad, Nashik, Maharashtra 422001",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3497,6 +3823,8 @@ export default function App() {
           "address": "107/1, Nelson Manickam Rd, Aminjikarai, Chennai, Tamil Nadu 600029",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3516,6 +3844,8 @@ export default function App() {
           "address": "48/7, Arcot Road, Saligram Behind Virugambakkam police station, Velayutham Colony, Annamalai Colony, Chennai, Tamil Nadu 600093",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3535,6 +3865,8 @@ export default function App() {
           "address": "MOUNT ROAD, 184, Anna Salai, Express Estate, Royapettah, Chennai, Tamil Nadu 600006",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3554,6 +3886,8 @@ export default function App() {
           "address": "Whites Road, opposite to Sathyam theatre, Royapettah, Chennai, Tamil Nadu 600006",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3572,7 +3906,9 @@ export default function App() {
           "contact": "",
           "address": "No. 398 & 398A, Velachery Tambaram Main Rd, Srinivasa Nagar, Ram Nagar, Velachery, Chennai, Tamil Nadu 600042",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3592,6 +3928,8 @@ export default function App() {
           "address": "10/8, 3rd Main Road, Below Telephone Exchange Bridge, Ambattur Industrial Estate, Sai Nagar, Ambattur Industrial Estate, Chennai, Tamil Nadu 600058",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3611,6 +3949,8 @@ export default function App() {
           "address": "4 SHAHNAJAF ROAD, LUCKNOW, UTTAR PRADESH, Hazratganj, 4, SHAHNAJAF ROAD, Uttar Pradesh 226001",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3630,6 +3970,8 @@ export default function App() {
           "address": "84/54-C, GT Rd, Anwerganj Railway Colony, Anwarganj, Darshan Purwa, Kanpur, Uttar Pradesh 208003",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3649,6 +3991,8 @@ export default function App() {
           "address": "NH34, Rai Purwa, Kanpur, Uttar Pradesh 208003",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3668,6 +4012,8 @@ export default function App() {
           "address": "Neeramankara, Kaimanam.P.O, Trivandrum, Neeramankara, Pappanamcode, Thiruvananthapuram, Kerala 695040",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3687,6 +4033,8 @@ export default function App() {
           "address": "52, Ring Rd, Block H, Lajpat Nagar III, Lajpat Nagar, New Delhi, Delhi 110024",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3706,6 +4054,8 @@ export default function App() {
           "address": "A-54, SEC-2 ,NOIDA , G.B NAGAR ,UP, A Block, Sector 2, A-54, NOIDA, Uttar Pradesh 201301",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3725,6 +4075,8 @@ export default function App() {
           "address": "1N, Gali Number 4, Block B 2, Safdarjung Enclave, New Delhi, Delhi 110029",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3744,6 +4096,8 @@ export default function App() {
           "address": "Unit 16-16A, Bestech Business Tower, Sohna Road, Sector 48, Tatvam Villas, Dhani, Sector 48, Gurugram, Haryana 122004",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3763,6 +4117,8 @@ export default function App() {
           "address": "B-84, Mayapuri, Phase –I, New Delhi, Block B, Mayapuri Industrial Area Phase I, Mayapuri, Delhi, 110064",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3781,7 +4137,9 @@ export default function App() {
           "contact": "",
           "address": "Umiya Nagar Society, Near Shree Chosath, Udhana - Magdalla Rd, Laxmi Nagar, Udhna, Surat, Gujarat 394210",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3801,6 +4159,8 @@ export default function App() {
           "address": "Udhana GIDC, Hari Ichchha Industrial Society, Udhna Udhyog Nagar, Udhna, Surat, Gujarat 394210",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3820,6 +4180,8 @@ export default function App() {
           "address": "10/2, JAKKUR MAIN ROAD,OPP TO FLYING SCHOOL, Jakkuru Layout, Byatarayanapura, BYATARAYANAPURA, Bengaluru, Karnataka 560092",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3839,6 +4201,8 @@ export default function App() {
           "address": "# 11/1 west of chord road, Rajaji Nagar 1st block bangalore, Chord Rd, Yeshwanthpur Industrial Suburb, Nagapura, Bengaluru, Karnataka 560010",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3858,6 +4222,8 @@ export default function App() {
           "address": "ANANT CARS AUTO PVT LTD, #327/1, 'PARAMDHAN' NEXT TO BHEL, OPP TO INDIAN OIL PETROL BUNK, MYSORE MAIN ROAD BENGALURU - 560026",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3877,6 +4243,8 @@ export default function App() {
           "address": "Plot No. 2E4, WhiteField Road, 1st Phase, Mahadevapura Post, Bengaluru, Karnataka 560048, India",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3896,6 +4264,8 @@ export default function App() {
           "address": "3-4, Nehru Market, Near Nehru Stadium, A.B M.P, Agra Bombay Rd, Ushaganj, Jaora Compound, Indore, Madhya Pradesh 452001, India",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3915,6 +4285,8 @@ export default function App() {
           "address": "#8/13, Upper Floor, Babji Nagar, Dewas Naka, AB Road, Indore, Madhya Pradesh 452010, India",
           "notes": "15 Amp sockets are available 6 days a week, during business hours from 9:30 AM to 6:00 PM. ",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3934,6 +4306,8 @@ export default function App() {
           "address": "167, union mill Rd, opposite Sangeetha theatre, Tirupur 641601",
           "notes": "Two 15 Amp sockets are available 7 days a week from 8.30am to 9pm",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3953,6 +4327,8 @@ export default function App() {
           "address": "25, 1st cross, 2nd Main road, Behind Graphite Mahadevpura Post, Doddanakundi Industrial Area 2, Phase 1, Doddanekkundi, Bengaluru, Karnataka 560048",
           "notes": "Private Battery Swapping Station only meant for Private use as of now. Will get updated when available for public!",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 0,
           
         },
         "geometry": {
@@ -3972,6 +4348,8 @@ export default function App() {
           "address": "E-103 Patel's Green Front Meherr road, Yapral Secunderabad",
           "notes": "All day when i am there. Call before coming.",
           "isValidated": "1",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -3990,7 +4368,9 @@ export default function App() {
           "contact": "1800 300 29 444 (24x7 tollfree)",
           "address": "D-298, T.T.C. Industrial Area, Turbhe, MIDC Industrial Area, Turbhe, Navi Mumbai, Maharashtra 400705",
           "notes": "24 hour availability. There is a DC fast charger and a 15 Amp socket for slow AC charging too.",
-          "isValidated": "1",
+          "isValidated": "0",
+          "netPorts": 5,
+          "avlPorts": 3,
           
         },
         "geometry": {
@@ -4005,32 +4385,256 @@ export default function App() {
       
     ]
   };
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(76.7794);
+  const [lat, setLat] = useState(30.7333);
+  const [zoom, setZoom] = useState(7);
 
-  // add markers to map
-for (const feature of geojson.features) {
-  // create a HTML element for each feature
-  const el = document.createElement('div');
-  // if(feature.isValidated === "1"){
-    el.className = 'marker_green';
-  // }
-  // else{
-  //   el.className = 'marker_red';
-  // }
+  function loadScript( url, callback ) {
+    var script = document.createElement( "script" )
+    script.type = "text/javascript";
+    if(script.readyState) {  // only required for IE <9
+      script.onreadystatechange = function() {
+        if ( script.readyState === "loaded" || script.readyState === "complete" ) {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else {  //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+  
+    script.src = url;
+    document.getElementsByTagName( "head" )[0].appendChild( script );
+  }
 
-  // make a marker for each feature and add to the map
-  // new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map.current);
-  // console.log(feature.geometry.coordinates);
-  new mapboxgl.Marker(el)
-  .setLngLat(feature.geometry.coordinates)
-  .setPopup(
-    new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setHTML(
-        `<h3>${feature.properties.name}</h3><p>${feature.properties['notes']}</p>`
+  // useEffect(() => {
+  //   loadScript('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js',function(){
+  //     map.current = new mapboxgl.Map({
+  //       container: mapContainer.current,
+  //       style: 'mapbox://styles/mapbox/streets-v12',
+  //       center: [lng, lat],
+  //       zoom: zoom
+  //     });
+  //     map.current.addControl(
+  //       new MapboxDirections({
+  //       accessToken: mapboxgl.accessToken
+  //       }),
+  //       'top-left'
+  //       );
+  //   });
+
+  // },[])
+
+  useEffect(() => {
+    loadScript('https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js',function() {
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [lng, lat],
+      zoom: zoom
+    });
+      for (const feature of geojson.features) {
+        // create a HTML element for each feature
+      const el = document.createElement('div');
+      if(feature.properties.isValidated === "0"){
+        el.className = 'marker_black';
+      }
+      else if(feature.properties.avlPorts === 0){
+        el.className = 'marker_red';
+      }
+      else{
+        el.className = 'marker_green';
+      }
+      new mapboxgl.Marker(el)
+      .setLngLat(feature.geometry.coordinates)
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(
+            `<h3>${feature.properties.name}</h3><p>${feature.properties['notes']}</p>`
+          )
       )
-  )
-  .addTo(map.current);
+      .addTo(map.current);
+    }
+    
+    map.current.addControl(
+      new mapboxgl.GeolocateControl({
+          positionOptions: {
+              enableHighAccuracy: true
+          },
+          // When active the map will receive updates to the device's location as it changes.
+          trackUserLocation: true,
+          // Draw an arrow next to the location dot to indicate which direction the device is heading.
+          showUserHeading: true
+      })
+  );
+  var start = [];
+
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        // Center the map on the user's location
+        start = [longitude, latitude];
+        map.current.setCenter([longitude, latitude]);
+    });
+} else {
+    alert('Geolocation is not supported by your browser');
 }
 
+// an arbitrary start will always be the same
+// only the end or destination will change
+
+// create a function to make a directions request
+async function getRoute(end) {
+    // make a directions request using cycling profile
+    // an arbitrary start will always be the same
+    // only the end or destination will change
+    const query = await fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      { method: 'GET' }
+    );
+    const json = await query.json();
+    const data = json.routes[0];
+    const route = data.geometry.coordinates;
+    const geojson = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: route
+      }
+    };
+    // if the route already exists on the map, we'll reset it using setData
+    if (map.current.getSource('route')) {
+      map.current.getSource('route').setData(geojson);
+    }
+    // otherwise, we'll make a new request
+    else {
+      map.current.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: geojson
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
+        }
+      });
+    }
+    // get the sidebar and add the instructions
+    const instructions = document.getElementById('instructions');
+    const steps = data.legs[0].steps;
+
+    let tripInstructions = '';
+    for (const step of steps) {
+    tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
+    data.duration / 60
+    )} min 🚴 </strong></p><ol>${tripInstructions}</ol>`;
+  }
+  
+  map.current.on('load', () => {
+    // make an initial directions request that
+    // starts and ends at the same location
+    getRoute(start);
+  
+    // Add starting point to the map
+    map.current.addLayer({
+      id: 'point',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'Point',
+                coordinates: start
+              }
+            }
+          ]
+        }
+      },
+      paint: {
+        'circle-radius': 10,
+        'circle-color': '#3887be'
+      }
+    });
+
+    map.current.on('click', (event) => {
+        const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+        const end = {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'Point',
+                coordinates: coords
+              }
+            }
+          ]
+        };
+        if (map.current.getLayer('end')) {
+          map.current.getSource('end').setData(end);
+        } else {
+          map.current.addLayer({
+            id: 'end',
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'FeatureCollection',
+                features: [
+                  {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'Point',
+                      coordinates: coords
+                    }
+                  }
+                ]
+              }
+            },
+            paint: {
+              'circle-radius': 10,
+              'circle-color': '#f30'
+            }
+          });
+        }
+        getRoute(coords);
+      });
+  });
+
+  });
+  }, [])
+
+  useEffect(() => {
+    if (!map.current) return; // wait for map to initialize
+    map.current.on('move', () => {
+      setLng(map.getCenter().lng.toFixed(4));
+      setLat(map.getCenter().lat.toFixed(4));
+      setZoom(map.getZoom().toFixed(2));
+    });
+  });
   return (
     <div>
       <div className="sidebar">
