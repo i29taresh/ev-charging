@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+var MapboxDirections = require('../node_modules/mapbox-gl-direction-location/dist/mapbox-gl-directions.js');
 // import geojson from './database/chargingStation';
 mapboxgl.accessToken = 'pk.eyJ1IjoiaTI5dGFyZXNoIiwiYSI6ImNsaDFtcTVhZzBhMTIzb29hYWsycHQyY3QifQ.9puy6GfNXVpfObCbUhStgA';
 
@@ -4623,8 +4624,14 @@ async function getRoute(end) {
         getRoute(coords);
       });
   });
-
+  map.current.addControl(
+    new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+    }),
+    'top-left'
+    );
   });
+
   }, [])
 
   useEffect(() => {
